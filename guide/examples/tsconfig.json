@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "typeRoots": ["../../understand-anything-plugin/packages/core/node_modules/@types"],
+    "allowImportingTsExtensions": true,
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "*.ts",
+    "fixtures/**/*.ts"
+  ]
+}

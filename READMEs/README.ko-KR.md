@@ -1,8 +1,19 @@
 <h1 align="center">Understand Anything</h1>
+
+번역 검수일: 2026-09-25 · 원문 기준: `6df3065f1d8ddc2ce3615314d1d493f36d6b1c80`
+
+[한국어 학습 가이드](../guide/README.md) · [코드 아키텍처 분석](../docs/archify/README.md)
+
 <p align="center">
   <strong>모든 코드베이스, 지식 베이스 또는 문서를 탐색, 검색, 질문할 수 있는 인터랙티브 지식 그래프로 변환합니다.</strong>
   <br />
   <em>Claude Code, Codex, Cursor, Copilot, Gemini CLI 등 다양한 플랫폼을 지원합니다.</em>
+</p>
+
+<p align="center">
+  <strong>무엇이든 이해하세요. <a href="https://egonex.ai">누구든 이해하세요.</a></strong>
+  <br />
+  <em>AI는 사람을 대체하는 것이 아니라 도와야 합니다.</em>
 </p>
 
 <p align="center">
@@ -22,8 +33,11 @@
   <a href="#copilot-cli"><img src="https://img.shields.io/badge/Copilot_CLI-24292e" alt="Copilot CLI" /></a>
   <a href="#gemini-cli"><img src="https://img.shields.io/badge/Gemini_CLI-4285F4" alt="Gemini CLI" /></a>
   <a href="#opencode"><img src="https://img.shields.io/badge/OpenCode-38bdf8" alt="OpenCode" /></a>
+  <a href="#mistral-vibe-cli"><img src="https://img.shields.io/badge/Vibe_CLI-7c3aed" alt="Vibe CLI" /></a>
+  <a href="#trae"><img src="https://img.shields.io/badge/Trae-7e22ce" alt="Trae" /></a>
   <a href="https://understand-anything.com"><img src="https://img.shields.io/badge/홈페이지-d4a574" alt="Homepage" /></a>
   <a href="https://understand-anything.com/demo/"><img src="https://img.shields.io/badge/라이브_데모-00c853" alt="Live Demo" /></a>
+  <a href="https://egonex.ai"><img src="https://img.shields.io/badge/Understand_Anyone-egonex.ai-d4a574" alt="Understand Anyone" /></a>
 </p>
 
 <p align="center">
@@ -31,9 +45,9 @@
 </p>
 
 <p align="center">
-  <strong>An open-source project from <a href="https://github.com/Egonex-AI">Egonex</a></strong>
+  <strong><a href="https://github.com/Egonex-AI">Egonex</a>의 오픈소스 프로젝트</strong>
   <br />
-  <em>Originally created by <a href="https://github.com/Lum1104">Lum1104</a>.</em>
+  <em>최초 제작자: <a href="https://github.com/Lum1104">Lum1104</a>.</em>
 </p>
 
 ---
@@ -128,7 +142,9 @@ Understand Anything은 [Claude Code Plugin](https://code.claude.com/docs/en/plug
 # 지원 언어: en(기본값), zh, zh-TW, ja, ko, ru
 ```
 
-`--language` 매개변수는 다음에 영향합니다:
+프로젝트에서 처음 실행할 때 `--language`가 없고 저장된 언어도 없다면 대화 언어를 감지합니다. 영어가 아니면 생성 전에 감지 결과를 확인하거나 다른 언어로 변경하도록 안내합니다. 선택은 `.ua/config.json`에 저장되어 이후 실행에 재사용됩니다.
+
+`--language` 매개변수는 다음에 영향을 줍니다:
 - 지식 그래프의 노드 요약과 설명
 - 대시보드 UI의 레이블, 버튼, 툴팁
 - 가이드 투어의 설명
@@ -185,7 +201,13 @@ Understand-Anything은 다양한 AI 코딩 플랫폼에서 사용할 수 있습�
 /plugin install understand-anything
 ```
 
-### 한 줄 설치 (Codex / OpenCode / OpenClaw / Antigravity / Gemini CLI / Pi Agent / Vibe CLI / VS Code Copilot / Hermes / Cline / KIMI CLI / Nanobot / Kiro)
+<a id="codex"></a>
+<a id="gemini-cli"></a>
+<a id="opencode"></a>
+<a id="mistral-vibe-cli"></a>
+<a id="trae"></a>
+
+### 한 줄 설치 (Codex / OpenCode / OpenClaw / Antigravity / Gemini CLI / Pi Agent / Vibe CLI / VS Code Copilot / Hermes / Cline / KIMI CLI / Trae / Nanobot / Kiro)
 
 **macOS / Linux:**
 ```bash
@@ -203,9 +225,13 @@ iwr -useb https://raw.githubusercontent.com/Egonex-AI/Understand-Anything/main/i
 
 > **스킬 호출 방식 안내:** 호출 접두사는 플랫폼마다 다릅니다. 대부분의 플랫폼은 슬래시 명령(`/understand`)을 사용하지만, **Codex는 `$`를 사용합니다** — `/understand`가 아니라 `$understand`를 입력하세요. 두 접두사 모두 인식되지 않으면 *"understand 스킬로 이 프로젝트를 분석해 줘"* 처럼 자연어로 요청하면 됩니다.
 
-- 지원되는 `<platform>` 값: `gemini`, `codex`, `opencode`, `pi`, `openclaw`, `antigravity`, `vibe`, `vscode`, `hermes`, `cline`, `kimi`, `nanobot`, `kiro`
-- 이후 업데이트: `./install.sh --update`
-- 제거: `./install.sh --uninstall <platform>`
+- 지원되는 `<platform>` 값: `gemini`, `codex`, `opencode`, `pi`, `openclaw`, `antigravity`, `vibe`, `vscode`, `hermes`, `cline`, `kimi`, `trae`, `nanobot`, `kiro`
+- 이후 업데이트:
+  - macOS / Linux: `./install.sh --update`
+  - Windows: `& "$HOME/.understand-anything/repo/install.ps1" -Update`
+- 제거:
+  - macOS / Linux: `./install.sh --uninstall <platform>`
+  - Windows: `& "$HOME/.understand-anything/repo/install.ps1" -Uninstall <platform>`
 
 ### Cursor
 
@@ -255,6 +281,7 @@ curl -fsSL https://raw.githubusercontent.com/Egonex-AI/Understand-Anything/main/
 | Hermes | ✅ 지원 | `install.sh hermes` |
 | Cline | ✅ 지원 | `install.sh cline` |
 | KIMI CLI | ✅ 지원 | `install.sh kimi` |
+| Trae | ✅ 지원 | `install.sh trae` |
 | Nanobot | ✅ 지원 | `install.sh nanobot` |
 | Kiro CLI / IDE | ✅ 지원 | `install.sh kiro` |
 
@@ -310,17 +337,17 @@ npx https://github.com/Egonex-AI/Understand-Anything/releases/latest/download/un
 
 ### 멀티 에이전트 파이프라인
 
-`/understand` 명령은 5개의 전문 에이전트를 조율하며, `/understand-domain`은 6번째 에이전트를 추가합니다:
+`/understand` 명령은 5개의 전문 에이전트를 조율하며, `/understand-domain`은 6번째, `/understand-knowledge`는 7번째 에이전트를 추가합니다:
 
-| 에이전트 | 역할 |
-|-------|------|
-| `project-scanner` | 파일 탐색, 언어 및 프레임워크 감지 |
-| `file-analyzer` | 함수, 클래스, 임포트 추출; 그래프 노드 및 엣지 생성 |
-| `architecture-analyzer` | 아키텍처 레이어 식별 |
-| `tour-builder` | 가이드 학습 투어 생성 |
-| `graph-reviewer` | 그래프 완전성 및 참조 무결성 검증 (기본적으로 인라인 실행; 전체 LLM 검토는 `--review` 사용) |
-| `domain-analyzer` | 비즈니스 도메인, 흐름 및 프로세스 단계 추출 (`/understand-domain`에서 사용) |
-| `article-analyzer` | 위키 문서에서 엔티티, 주장 및 암묵적 관계 추출 (`/understand-knowledge`에서 사용) |
+| 에이전트 | 역할 | 사용하는 명령 |
+| --- | --- | --- |
+| `project-scanner` | 파일 탐색, 언어 및 프레임워크 감지 | `/understand` |
+| `file-analyzer` | 함수, 클래스, 임포트 추출; 그래프 노드 및 엣지 생성 | `/understand` |
+| `architecture-analyzer` | 아키텍처 레이어 식별 | `/understand` |
+| `tour-builder` | 가이드 학습 투어 생성 | `/understand` |
+| `graph-reviewer` | 완전성·참조 무결성 검증; 기본 인라인, `--review`로 전체 LLM 검토 | `/understand` |
+| `domain-analyzer` | 비즈니스 도메인, 흐름, 단계 추출 | `/understand-domain` |
+| `article-analyzer` | 위키 엔티티, 주장, 암묵적 관계 추출 | `/understand-knowledge` |
 
 파일 분석기는 병렬로 실행됩니다(최대 5개 동시, 배치당 20~30개 파일). 증분 업데이트를 지원하여 마지막 실행 이후 변경된 파일만 재분석합니다.
 

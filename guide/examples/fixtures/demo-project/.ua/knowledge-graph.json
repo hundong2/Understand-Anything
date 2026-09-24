@@ -1,0 +1,108 @@
+{
+  "version": "1.0.0",
+  "kind": "codebase",
+  "project": {
+    "name": "Korean tutorial fixture",
+    "languages": [
+      "TypeScript"
+    ],
+    "frameworks": [],
+    "description": "수작업 학습 그래프; 실제 LLM 분석 결과가 아님",
+    "analyzedAt": "2026-09-25T00:00:00.000Z",
+    "gitCommitHash": "fixture-not-a-git-revision"
+  },
+  "nodes": [
+    {
+      "id": "checkout",
+      "type": "file",
+      "name": "checkout.ts",
+      "filePath": "src/checkout.ts",
+      "lineRange": [
+        1,
+        6
+      ],
+      "summary": "학습용 주문 진입점",
+      "tags": [
+        "checkout"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "payment",
+      "type": "file",
+      "name": "payment.ts",
+      "filePath": "src/payment.ts",
+      "lineRange": [
+        1,
+        6
+      ],
+      "summary": "학습용 결제 위임",
+      "tags": [
+        "payment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "gateway",
+      "type": "file",
+      "name": "gateway.ts",
+      "filePath": "src/gateway.ts",
+      "lineRange": [
+        1,
+        4
+      ],
+      "summary": "네트워크 없는 승인 판정",
+      "tags": [
+        "gateway"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "checkout",
+      "target": "payment",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "payment",
+      "target": "gateway",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "app",
+      "name": "Application",
+      "description": "호출자",
+      "nodeIds": [
+        "checkout"
+      ]
+    },
+    {
+      "id": "service",
+      "name": "Service",
+      "description": "처리 및 판정",
+      "nodeIds": [
+        "payment",
+        "gateway"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "입력부터 승인까지",
+      "description": "checkout → payment → gateway 순으로 읽는다.",
+      "nodeIds": [
+        "checkout",
+        "payment",
+        "gateway"
+      ]
+    }
+  ]
+}

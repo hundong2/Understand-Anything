@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Understand Anything 코드 아키텍처",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/hundong2/Understand-Anything",
+      "revision": "6df3065f1d8ddc2ce3615314d1d493f36d6b1c80"
+    },
+    "viewBox": [
+      1390,
+      600
+    ]
+  },
+  "components": [
+    {
+      "id": "host",
+      "type": "external",
+      "label": "AI 코딩 플랫폼",
+      "sublabel": "understand 스킬 해석",
+      "pos": [
+        30,
+        265
+      ],
+      "size": [
+        190,
+        82
+      ],
+      "sources": [
+        {
+          "path": "understand-anything-plugin/skills/understand/SKILL.md",
+          "line": 275,
+          "end_line": 295
+        }
+      ]
+    },
+    {
+      "id": "analysis",
+      "type": "backend",
+      "label": "분석·조립",
+      "sublabel": "LLM 의미 + merge + 검토",
+      "pos": [
+        315,
+        265
+      ],
+      "size": [
+        190,
+        82
+      ],
+      "sources": [
+        {
+          "path": "understand-anything-plugin/skills/understand/SKILL.md",
+          "line": 341,
+          "end_line": 395
+        },
+        {
+          "path": "understand-anything-plugin/skills/understand/merge-batch-graphs.py",
+          "line": 1277,
+          "end_line": 1342
+        }
+      ]
+    },
+    {
+      "id": "parsers",
+      "type": "backend",
+      "label": "정적 구조 도구",
+      "sublabel": "scan · Tree-sitter · imports",
+      "pos": [
+        315,
+        55
+      ],
+      "size": [
+        190,
+        82
+      ],
+      "sources": [
+        {
+          "path": "understand-anything-plugin/skills/understand/scan-project.mjs",
+          "line": 60,
+          "end_line": 96
+        },
+        {
+          "path": "understand-anything-plugin/skills/understand/extract-structure.mjs",
+          "line": 58,
+          "end_line": 90
+        },
+        {
+          "path": "understand-anything-plugin/packages/core/src/plugins/tree-sitter-plugin.ts",
+          "line": 32,
+          "end_line": 62
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "type": "database",
+      "label": "프로젝트 JSON",
+      "sublabel": ".ua / 레거시 데이터 폴더",
+      "pos": [
+        600,
+        265
+      ],
+      "size": [
+        190,
+        82
+      ],
+      "sources": [
+        {
+          "path": "understand-anything-plugin/skills/understand/SKILL.md",
+          "line": 811,
+          "end_line": 836
+        },
+        {
+          "path": "understand-anything-plugin/packages/core/src/persistence/index.ts",
+          "line": 7,
+          "end_line": 24
+        },
+        {
+          "path": "understand-anything-plugin/packages/core/src/persistence/index.ts",
+          "line": 86,
+          "end_line": 126
+        }
+      ]
+    },
+    {
+      "id": "serve",
+      "type": "security",
+      "label": "로컬 HTTP 서버",
+      "sublabel": "Vite 또는 배포 viewer",
+      "pos": [
+        885,
+        265
+      ],
+      "size": [
+        190,
+        82
+      ],
+      "sources": [
+        {
+          "path": "understand-anything-plugin/packages/viewer/bin/viewer.mjs",
+          "line": 308,
+          "end_line": 366
+        },
+        {
+          "path": "understand-anything-plugin/packages/viewer/bin/viewer.mjs",
+          "line": 369,
+          "end_line": 391
+        },
+        {
+          "path": "understand-anything-plugin/packages/dashboard/vite.config.ts",
+          "line": 15,
+          "end_line": 39
+        }
+      ]
+    },
+    {
+      "id": "dashboard",
+      "type": "frontend",
+      "label": "React 대시보드",
+      "sublabel": "검증 → Zustand → React Flow",
+      "pos": [
+        1170,
+        265
+      ],
+      "size": [
+        190,
+        82
+      ],
+      "sources": [
+        {
+          "path": "understand-anything-plugin/packages/dashboard/src/App.tsx",
+          "line": 144,
+          "end_line": 170
+        },
+        {
+          "path": "understand-anything-plugin/packages/dashboard/src/store.ts",
+          "line": 366,
+          "end_line": 395
+        },
+        {
+          "path": "understand-anything-plugin/packages/dashboard/src/components/GraphView.tsx",
+          "line": 1544,
+          "end_line": 1562
+        }
+      ]
+    },
+    {
+      "id": "search",
+      "type": "backend",
+      "label": "브라우저용 코어",
+      "sublabel": "Zod 검증 · Fuse.js 검색",
+      "pos": [
+        1170,
+        475
+      ],
+      "size": [
+        190,
+        82
+      ],
+      "sources": [
+        {
+          "path": "understand-anything-plugin/packages/core/src/schema.ts",
+          "line": 563,
+          "end_line": 607
+        },
+        {
+          "path": "understand-anything-plugin/packages/core/src/search.ts",
+          "line": 25,
+          "end_line": 61
+        },
+        {
+          "path": "understand-anything-plugin/packages/dashboard/src/store.ts",
+          "line": 1,
+          "end_line": 8
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "host",
+      "to": "analysis",
+      "label": "배치 조율",
+      "variant": "emphasis"
+    },
+    {
+      "from": "analysis",
+      "to": "parsers",
+      "label": "구조 추출",
+      "variant": "default"
+    },
+    {
+      "from": "analysis",
+      "to": "files",
+      "label": "최종 저장",
+      "variant": "emphasis"
+    },
+    {
+      "from": "files",
+      "to": "serve",
+      "label": "디스크 읽기",
+      "variant": "emphasis"
+    },
+    {
+      "from": "serve",
+      "to": "dashboard",
+      "label": "토큰·JSON",
+      "variant": "security"
+    },
+    {
+      "from": "dashboard",
+      "to": "search",
+      "label": "검증·검색",
+      "labelDy": 76
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "분석과 열람",
+      "items": [
+        "LLM 의미 생성은 호스트 플랫폼에서 수행",
+        "viewer 열람은 저장된 JSON을 사용"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "접근 경계",
+      "items": [
+        "loopback·토큰·그래프 파일 목록 검사",
+        "공개 서비스용 사용자 인증은 분석 범위 밖"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "코드 근거",
+      "items": [
+        "6df3065f 기준 대표 코드베이스 경로",
+        "도메인·위키·Figma 확장은 별도 경로"
+      ]
+    }
+  ]
+}

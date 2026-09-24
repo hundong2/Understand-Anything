@@ -1,5 +1,7 @@
 <h1 align="center">Understand Anything</h1>
 
+[Korean learning guide](guide/README.md) · [Code architecture (Archify)](docs/archify/README.md)
+
 <p align="center">
   <strong>Turn any codebase, knowledge base, or docs into an interactive knowledge graph you can explore, search, and ask questions about.</strong>
   <br />
@@ -197,6 +199,12 @@ Understand-Anything works across multiple AI coding platforms.
 /plugin install understand-anything
 ```
 
+
+<a id="codex"></a>
+<a id="gemini-cli"></a>
+<a id="opencode"></a>
+<a id="mistral-vibe-cli"></a>
+<a id="trae"></a>
 
 ### One-line install (Codex / OpenCode / OpenClaw / Antigravity / Gemini CLI / Pi Agent / Vibe CLI / VS Code Copilot / Hermes / Cline / KIMI CLI / Trae / Nanobot / Kiro)
 
